@@ -1,5 +1,4 @@
-import { Question } from '@/components/multistep-form/types/question';
-
+import { Question } from '../types/question';
 import { InputTypes } from './input-types';
 
 export const QUESTIONS_LIST: Question[] = [
