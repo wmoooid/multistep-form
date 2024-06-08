@@ -1,0 +1,16 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 0;
+    height: 5.25rem;
+}
+
+.logo_wrapper {
+    user-select: none;
+}
+
+.logo_text {
+    font-size: 1.125rem;
+    color: var(--secondary-color);
+}

@@ -1,10 +1,15 @@
+import './globals.css';
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+
 import { App } from './app';
-import './globals.css';
+import { AppBoundaries } from './boundaries';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
-        <App />
+        <AppBoundaries>
+            <App />
+        </AppBoundaries>
     </React.StrictMode>,
 );
