@@ -25,7 +25,9 @@ export default defineConfig({
           .splice(-2)
           .shift();
 
-        const hash = crypto.createHash('md5').update(css).digest('base64').substring(0, 5);
+        const hash = crypto.createHash('md5').update(css).digest('hex').substring(0, 5);
+
+        console.log(crypto.createHash('md5').update(css).digest('base64').substring(0, 5));
 
         return `${componentName}__${name}_${hash}`;
       }
