@@ -1,0 +1,32 @@
+.button {
+  display: grid;
+  place-items: center;
+
+  min-height: 2.5rem;
+
+  padding: 0.25rem 0.85rem;
+  border-radius: 0.5rem;
+
+  background-color: var(--blue);
+  color: var(--white);
+
+  cursor: pointer;
+  user-select: none;
+}
+
+.button:hover {
+  filter: brightness(0.9);
+}
+
+.button:focus {
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+}
+
+.button:active {
+  filter: brightness(0.8);
+}
+
+.button:disabled {
+  background-color: var(--muted-color);
+  pointer-events: none;
+}
