@@ -1,0 +1,44 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.value_wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.root {
+  background-color: var(--background-color);
+  width: 1.5rem;
+  height: 1.5rem;
+
+  border: 1px solid var(--muted-color);
+  border-radius: 0.25rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.root:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.root:focus {
+  box-shadow: 0 0 0 2px rgba(150, 150, 150, 0.25);
+}
+
+.indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--blue);
+}
