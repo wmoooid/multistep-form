@@ -1,0 +1,30 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.item {
+  display: none;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.item[data-state='active'] {
+  display: flex;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.text {
+  font-size: 1.125rem;
+  font-weight: 500;
+}
+
+.error {
+  color: var(--red);
+}
