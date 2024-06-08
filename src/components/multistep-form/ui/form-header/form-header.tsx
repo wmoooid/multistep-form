@@ -1,3 +1,4 @@
+import { StepProgress } from '@/shared/ui/step-progress';
 import styles from './form-header.module.css';
 
 export const FormHeader = () => {
@@ -6,6 +7,7 @@ export const FormHeader = () => {
             <div className={styles.heading}>
                 <h1 className={styles.title}>Тестирование</h1>
             </div>
+            <StepProgress stepsLength={4} currentStep={0} />
         </div>
     );
 };
