@@ -40,6 +40,10 @@ export const multistepFormSlice = createSlice({
       saveToLocalStorage(state);
     },
 
+    saveFormState: (state) => {
+      saveToLocalStorage(state);
+    },
+
     submitForm: () => {
       localStorage.removeItem(LocalStorage.FORM_STATE);
     },
@@ -61,9 +65,13 @@ export const multistepFormSlice = createSlice({
       state.currentStep += 1;
       updateFormStateFlags(state);
       saveToLocalStorage(state);
+    },
+
+    decrementTimer: (state) => {
+      state.timer = Math.max(state.timer - 1000, 0);
     }
   }
 });
 
-export const { setFormState, submitForm, setValue, prevStep, nextStep } = multistepFormSlice.actions;
+export const { setFormState, saveFormState, submitForm, setValue, prevStep, nextStep, decrementTimer } = multistepFormSlice.actions;
 export const multistepFormReducer = multistepFormSlice.reducer;
