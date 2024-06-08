@@ -1,50 +1,40 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { RootState } from '@/app/store/config/store';
+import { InputTypes } from '@/shared/consts/input-types';
+import { Question } from '@/shared/types/question';
 import { CheckboxGroup } from '@/shared/ui/checkbox-group';
 import { Input } from '@/shared/ui/input';
 import { RadioGroup } from '@/shared/ui/radio-group';
 import { Textarea } from '@/shared/ui/textarea';
 
+import { setValue } from '../../model/multistep-form-slice';
 import styles from './form-body.module.css';
 
-export const QUESTIONS_LIST = [
-  {
-    title: 'Вы воспринимаете радугу как…',
-    type: 'radio',
-    fields: ['разноцветную ленту', 'шлейф богини', 'атмосферное явление', 'дорогу из блестящих камней', 'множество водяных капель (дождя или тумана)']
-  },
-  {
-    title: 'К чему вы более восприимчивы?',
-    type: 'radio',
-    fields: ['к энергии', 'к воле', 'к обаянию', 'к уму', 'к фантазиям']
-  },
-  {
-    title: 'Выберите небесное тело',
-    type: 'radio',
-    fields: ['Солнце', 'Марс', 'Юпитер', 'Венера', 'Сатурн']
-  },
-  {
-    title: 'Каким драгоценным камнем вы могли бы быть?',
-    type: 'checkbox',
-    fields: ['Изумрудом', 'Сапфиром', 'Рубином', 'Топазом', 'Яшма']
-  },
-  {
-    title: 'Опишите что сейчас на вашем столе',
-    type: 'text'
-  },
-  {
-    title: 'Расскажите, что напоминает вам о детстве',
-    type: 'textarea'
-  }
-];
+type FormStepProps = {
+  isActive: boolean;
+  fields?: string[];
+  value: string;
+  onValueChange: (value: string) => void;
+} & Question;
 
 export const FormBody: React.FC = () => {
+  const questions = useSelector((state: RootState) => state.multistepForm.questions);
+  const answers = useSelector((state: RootState) => state.multistepForm.answers);
+  const currentStep = useSelector((state: RootState) => state.multistepForm.currentStep);
+
+  const dispatch = useDispatch();
+  const onValueChange = (index: number) => (value: string) => dispatch(setValue({ index, value }));
+
   return (
     <ul className={styles.list}>
-      {QUESTIONS_LIST.map((question, index) => (
+      {questions.map((question, index) => (
         <FormStep
           key={index}
-          title={question.title}
+          isActive={currentStep === index}
+          value={answers[index]}
+          onValueChange={onValueChange(index)}
           {...question}
         />
       ))}
@@ -52,35 +42,45 @@ export const FormBody: React.FC = () => {
   );
 };
 
-const FormStep: React.FC = ({ title, type, fields }) => {
+const FormStep: React.FC<FormStepProps> = ({ isActive, title, type, fields, value, onValueChange }) => {
   return (
-    <li className={styles.item}>
+    <li
+      className={styles.item}
+      data-state={isActive ? 'active' : ''}>
       <p className={styles.text}>{title}</p>
       <>
-        {type === 'text' && (
+        {type === InputTypes.TEXT && (
           <Input
             name={title}
-            type={'text'}
+            type={InputTypes.TEXT}
             placeholder="Введите ответ"
+            value={value}
+            onValueChange={onValueChange}
           />
         )}
-        {type === 'textarea' && (
+        {type === InputTypes.TEXTAREA && (
           <Textarea
             name={title}
-            type={'textarea'}
+            type={InputTypes.TEXTAREA}
             placeholder="Введите ответ"
+            value={value}
+            onValueChange={onValueChange}
           />
         )}
-        {type === 'radio' && (
+        {type === InputTypes.RADIO && (
           <RadioGroup
             name={title}
             fields={fields}
+            value={value}
+            onValueChange={onValueChange}
           />
         )}
-        {type === 'checkbox' && (
+        {type === InputTypes.CHECKBOX && (
           <CheckboxGroup
             name={title}
             fields={fields}
+            value={value}
+            onValueChange={onValueChange}
           />
         )}
       </>

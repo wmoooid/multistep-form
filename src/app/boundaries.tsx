@@ -1,5 +1,10 @@
 import { Layout } from './layout';
+import { AppStoreProvider } from './store';
 
 export const AppBoundaries = ({ children }: { children: React.ReactNode }) => {
-    return <Layout>{children}</Layout>;
+  return (
+    <AppStoreProvider>
+      <Layout>{children}</Layout>
+    </AppStoreProvider>
+  );
 };
